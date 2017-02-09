@@ -222,6 +222,7 @@ module Neo4j
 
               chunk << recvmsg(chunk_size)
             end
+            return if chunk.size.zero?
 
             unpacker = PackStream::Unpacker.new(StringIO.new(chunk))
             [].tap { |r| while arg = unpacker.unpack_value!; r << arg; end }
